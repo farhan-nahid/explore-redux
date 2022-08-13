@@ -1,3 +1,5 @@
+import Button from './Button';
+
 export default function Counter({ item, handelIncrement, handelDecrement }) {
   return (
     <div className='p-4 h-auto flex flex-col items-center justify-center space-y-5 bg-white rounded shadow'>
@@ -6,18 +8,17 @@ export default function Counter({ item, handelIncrement, handelDecrement }) {
       </div>
 
       <div className='flex space-x-3'>
-        <button
+        <Button
           className='bg-indigo-400 text-white px-3 py-2 rounded shadow'
-          onClick={() => handelIncrement(item.id)}
-        >
-          Increment
-        </button>
-        <button
+          handler={() => handelIncrement(item.id)}
+          title='Increment'
+        />
+
+        <Button
           className='bg-red-400 text-white px-3 py-2 rounded shadow'
-          onClick={() => handelDecrement(item.id)}
-        >
-          Decrement
-        </button>
+          handler={() => handelDecrement(item.id)}
+          title='Decrement'
+        />
       </div>
     </div>
   );
