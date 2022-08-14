@@ -1,6 +1,11 @@
-export default function Button({ className, handler, title }) {
+export default function Button({ handler, title }) {
   return (
-    <button className={className} onClick={handler}>
+    <button
+      className={`${
+        title === "Increment" ? "bg-indigo-400" : "bg-red-400"
+      } text-white px-3 py-2 rounded shadow`}
+      onClick={handler}
+    >
       {title}
     </button>
   );
