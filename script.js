@@ -1,41 +1,54 @@
 // select dom elements
-const counterEl = document.getElementById('counter');
-const incrementEl = document.getElementById('increment');
-const decrementEl = document.getElementById('decrement');
-
-const counter2El = document.getElementById('counter2');
-const increment2El = document.getElementById('increment2');
-const decrement2El = document.getElementById('decrement2');
+const counterEl = document.getElementById("counter");
+const incrementEl = document.getElementById("increment");
+const decrementEl = document.getElementById("decrement");
 
 // initial state
-let count = 0;
-let count2 = 0;
+const initialState = {
+  value: 0,
+};
 
-// event listeners
-incrementEl.addEventListener('click', () => {
-  count++;
-  counterEl.innerText = count;
-});
-
-decrementEl.addEventListener('click', () => {
-  if (count > 0) {
-    count--;
-    counterEl.innerText = count;
+// reducer function
+const reducerFunction = (state = initialState, action) => {
+  if (action.type === "INCREMENT") {
+    return {
+      ...state,
+      value: state.value + 1,
+    };
+  } else if (action.type === "DECREMENT") {
+    return {
+      ...state,
+      value: state.value - 1,
+    };
   } else {
-    alert('You can not decrement less then 1');
+    return state;
   }
+};
+
+// create a store
+const store = Redux.createStore(reducerFunction);
+
+// Update UI Manually (Because it's a vanilla JS project)
+const renderFunction = () => {
+  const myState = store.getState();
+  counterEl.innerText = myState.value.toString();
+};
+
+// Update UI Initially when page load
+renderFunction();
+
+store.subscribe(renderFunction);
+
+// increment event handler
+incrementEl.addEventListener("click", () => {
+  store.dispatch({
+    type: "INCREMENT",
+  });
 });
 
-increment2El.addEventListener('click', () => {
-  count2++;
-  counter2El.innerText = count2;
-});
-
-decrement2El.addEventListener('click', () => {
-  if (count2 > 0) {
-    count2--;
-    counter2El.innerText = count2;
-  } else {
-    alert('You can not decrement less then 1');
-  }
+// decrement event handler
+decrementEl.addEventListener("click", () => {
+  store.dispatch({
+    type: "DECREMENT",
+  });
 });
