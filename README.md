@@ -1,1 +1,1 @@
-### Explore Redux
+### Explore Redux (LWS)
